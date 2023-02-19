@@ -9,9 +9,8 @@ const alr = {
   symbol: 'ALR',
   description: 'Cross-platform retro-future car racing game built on Solana.',
   url: 'https://alpha-league-racing.com',
-  logo: 'https://alpha-league-racing.s3.eu-west-3.amazonaws.com/tournament_maker/logo.png',
-  banner:
-    'https://alpha-league-racing.s3.eu-west-3.amazonaws.com/tournament_maker/banner.jpg',
+  logo: 'https://clash-of-degens.netlify.app/media/logo.png',
+  banner: 'https://clash-of-degens.netlify.app/media/banner.jpg',
   createEventUrl: `${baseUrl}/createTournament`,
   getEventUrl: `${baseUrl}/getOneTournament/{address}`,
   twitter: 'https://twitter.com/ALeague_Racing',
@@ -81,29 +80,29 @@ game.setGetEventBridge((data) => {
     });
   });
 
-  eventData.ranking.push({
-    pseudo: 'Grizzlython',
-    wallet: 'D3pxE2bsPdUkB2sMzEvx7A8HRBTkv5m75EEH4Tv1oDxa',
-    score: 100,
-  });
+  // eventData.ranking.push({
+  //   pseudo: 'Grizzlython',
+  //   wallet: 'D3pxE2bsPdUkB2sMzEvx7A8HRBTkv5m75EEH4Tv1oDxa',
+  //   score: 100,
+  // });
 
-  eventData.ranking.push({
-    pseudo: 'ClockWork',
-    wallet: 'Ho8Gbm29upYTndYRD3pvzcPAD5bdEMjR9MYevyxKerrc',
-    score: 90,
-  });
+  // eventData.ranking.push({
+  //   pseudo: 'ClockWork',
+  //   wallet: 'Ho8Gbm29upYTndYRD3pvzcPAD5bdEMjR9MYevyxKerrc',
+  //   score: 90,
+  // });
 
-  eventData.ranking.push({
-    pseudo: 'Grizzlython',
-    wallet: 'aaa',
-    score: 60,
-  });
+  // eventData.ranking.push({
+  //   pseudo: 'Grizzlython',
+  //   wallet: 'aaa',
+  //   score: 60,
+  // });
 
-  eventData.ranking.push({
-    pseudo: 'Grizzlython',
-    wallet: 'aaa',
-    score: 30,
-  });
+  // eventData.ranking.push({
+  //   pseudo: 'Grizzlython',
+  //   wallet: 'aaa',
+  //   score: 30,
+  // });
 
   return eventData;
 });

@@ -53,7 +53,17 @@ export class ThirdWeb {
     rewardsDistribution,
     game,
     symbol,
+    creator,
   }) => {
+    console.log(
+      address,
+      dateStart,
+      dateEnd,
+      rewardsDistribution,
+      game,
+      symbol,
+      creator,
+    );
     const program = await this.sdk.getProgram(address, 'nft-drop');
     const conditions = await program.claimConditions.get();
     const metadata = await program.getMetadata();
@@ -68,7 +78,7 @@ export class ThirdWeb {
         name: metadata.name + ' #' + i,
         description: metadata.description,
         image: metadata.image,
-        symbol: address,
+        symbol: 'CODT',
         external_url: `${process.env.APP_URL}/event/${address}`,
         properties: [
           {
@@ -93,6 +103,10 @@ export class ThirdWeb {
             value: dateEnd,
           },
 
+          {
+            name: 'Creator',
+            value: creator,
+          },
           {
             name: 'Rewards Distribution',
             value: rewardsDistribution,
