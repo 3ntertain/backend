@@ -20,9 +20,6 @@ export class ApiService {
   async createEvent(param: any) {
     const pubkey = this.solanaWeb3.sender.publicKey.toBase58();
 
-    console.log('Amin PUBKEY', pubkey);
-    console.log(param);
-
     const bridge = param.game.symbol.clean();
 
     const folderPath = __dirname + '/../Data';
@@ -32,8 +29,6 @@ export class ApiService {
     let dropAddress;
 
     while (!dropAddress) {
-      console.log('try to create drop');
-
       try {
         dropAddress = await this.thirdWeb.createDrop({
           name: param.title,
@@ -49,12 +44,9 @@ export class ApiService {
 
     if (!dropAddress) return;
 
-    console.log('ready to set claim conditions', dropAddress);
-
     let txMint;
 
     while (!txMint) {
-      console.log('try to set claim conditions');
       try {
         txMint = await this.thirdWeb.setClaimConditions({
           address: dropAddress,
@@ -65,8 +57,6 @@ export class ApiService {
         console.log('THE ERROR' + e);
       }
     }
-
-    console.log('mint', txMint);
 
     let txClaim;
 
@@ -85,10 +75,6 @@ export class ApiService {
         console.log('THE ERROR' + e);
       }
     }
-
-    console.log('claim', txClaim);
-
-    console.log('success: ' + dropAddress);
 
     const event = await game.createEvent(param, dropAddress);
 

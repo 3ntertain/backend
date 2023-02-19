@@ -29,8 +29,6 @@ export class ThirdWeb {
   };
 
   setClaimConditions = async ({ address, price, startTime }) => {
-    console.log('setClaimConditions', address, price, startTime);
-
     const program = await this.sdk.getProgram(address, 'nft-drop');
     const conditions = await program.claimConditions.get();
     const supply = conditions.totalAvailableSupply;
@@ -55,15 +53,6 @@ export class ThirdWeb {
     symbol,
     creator,
   }) => {
-    console.log(
-      address,
-      dateStart,
-      dateEnd,
-      rewardsDistribution,
-      game,
-      symbol,
-      creator,
-    );
     const program = await this.sdk.getProgram(address, 'nft-drop');
     const conditions = await program.claimConditions.get();
     const metadata = await program.getMetadata();

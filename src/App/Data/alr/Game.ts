@@ -44,7 +44,7 @@ const alr = {
 const game = new Game(alr);
 
 game.setCreateEventBridge((param) => {
-  const data: any = alr;
+  const data: any = alr.options;
 
   data.title = param.title;
   data.rewards = Math.round(param.prizePool) + ' $' + param.token.symbol;
