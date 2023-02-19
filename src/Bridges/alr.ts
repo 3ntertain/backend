@@ -2,11 +2,14 @@ import { Injectable } from '@nestjs/common';
 import { Tournaments } from 'src/Entities/tournaments.entity';
 
 export class Bridge {
+  baseUrl: string;
   createUrl: string;
+  getUrl: string;
 
   constructor() {
-    this.createUrl =
-      'https://alr-api-grizzlython.herokuapp.com/call-tournaments/createTournament';
+    this.baseUrl = 'https://alr-api-grizzlython.herokuapp.com/call-tournaments';
+    this.createUrl = `${this.baseUrl}/createTournament`;
+    this.getUrl = `${this.baseUrl}/getOneTournament`;
   }
 
   createEvent = async (param: any) => {
@@ -55,5 +58,31 @@ export class Bridge {
 
       return await results.json();
     } catch (error) {}
+  };
+
+  getEvent = async (id: number) => {
+    const response = await fetch(this.getUrl + '/' + id);
+    const data = await response.json();
+
+    const eventData = {
+      status: data.status,
+      ranking: [],
+    };
+
+    data.rankings.forEach((element: any) => {
+      eventData.ranking.push({
+        player: element.pseudo,
+        wallet: element.wallet,
+        score: element.score,
+      });
+    });
+
+    eventData.ranking.push({
+      player: 'Grizzlython',
+      wallet: 'D3pxE2bsPdUkB2sMzEvx7A8HRBTkv5m75EEH4Tv1oDxa',
+      score: 100,
+    });
+
+    return eventData;
   };
 }

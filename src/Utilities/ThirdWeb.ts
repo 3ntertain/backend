@@ -53,7 +53,6 @@ export class ThirdWeb {
     rewardsDistribution,
     game,
     symbol,
-    eventId,
   }) => {
     const program = await this.sdk.getProgram(address, 'nft-drop');
     const conditions = await program.claimConditions.get();
@@ -69,20 +68,22 @@ export class ThirdWeb {
         name: metadata.name + ' #' + i,
         description: metadata.description,
         image: metadata.image,
-        external_url: `${process.env.APP_URL}/event/${address}/${i}`,
+        symbol: address,
+        external_url: `${process.env.APP_URL}/event/${address}`,
         properties: [
           {
             name: 'Game',
             value: game,
           },
           {
+            name: 'Collection',
+            value: address,
+          },
+          {
             name: 'Symbol',
             value: symbol,
           },
-          {
-            name: 'Event ID',
-            value: eventId,
-          },
+
           {
             name: 'Start',
             value: dateStart,
@@ -91,6 +92,7 @@ export class ThirdWeb {
             name: 'End',
             value: dateEnd,
           },
+
           {
             name: 'Rewards Distribution',
             value: rewardsDistribution,
