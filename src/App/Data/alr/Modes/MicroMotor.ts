@@ -4,10 +4,10 @@ import { laps, car, difficulty, drift, boost, retries } from '../ModeOptions';
 
 const mode = new Mode();
 
-mode.title = 'Micro Machine';
+mode.title = 'Micro Motor';
 
-mode.description =
-  'Collect as much coin as possible in a limited amount of time. Golden rush!';
+mode.description = 'Relieve your childhood with this classic game mode!';
+
 mode.image = 'https://clash-of-degens.netlify.app/media/micromachine.jpg';
 
 mode.config = {
@@ -15,7 +15,7 @@ mode.config = {
   track: 9,
   mode: 'topdown',
   model: 'both',
-  game: 'arena_coins_collect',
+  game: 'course',
   laps: 1,
   boost: 5,
   retries: 20,

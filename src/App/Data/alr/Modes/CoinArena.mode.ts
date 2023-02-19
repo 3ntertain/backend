@@ -6,7 +6,7 @@ const mode = new Mode();
 
 mode.title = 'Coin Arena';
 
-mode.description = 'Relieve your childhood with this classic game mode!';
+mode.description = 'Collect as much coin as possible. Fast!';
 mode.image = 'https://clash-of-degens.netlify.app/media/coinarena.jpg';
 
 mode.config = {

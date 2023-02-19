@@ -1,6 +1,6 @@
 import { Game } from '../../../Entities/Game.entity';
 import TimeAttack from './Modes/TimeAttack.mode';
-import MicroMachine from './Modes/MicroMachine.mode';
+import MicroMachine from './Modes/MicroMotor';
 import CoinArena from './Modes/CoinArena.mode';
 const baseUrl = 'https://alr-api-grizzlython.herokuapp.com/call-tournaments';
 
@@ -16,8 +16,8 @@ const alr = {
   twitter: 'https://twitter.com/ALeague_Racing',
   discord: 'https://discord.gg/bRmKQ5Tc',
 
-  flatFee: 0.1,
-  feePerPlayer: 0.1,
+  flatFee: 0.09,
+  feePerPlayer: 0.05,
 
   options: {
     season_id: 0,
