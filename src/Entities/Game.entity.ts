@@ -60,6 +60,10 @@ export class Game {
 
     data.nft_ticket_address = ticket_address;
 
+    console.log('*******');
+    console.log(data);
+    console.log('*******');
+
     try {
       const results = await fetch(this.createEventUrl, {
         method: 'POST',
@@ -80,7 +84,6 @@ export class Game {
   async getEvent(address: string): Promise<any> {
     if (!address) return;
 
-    console.log(this.getEventUrl.replace('{address}', address));
     const response = await fetch(
       this.getEventUrl.replace('{address}', address),
     );

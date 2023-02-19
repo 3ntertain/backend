@@ -7,7 +7,6 @@ const mode = new Mode();
 mode.title = 'Micro Motor';
 
 mode.description = 'Relieve your childhood with this classic game mode!';
-
 mode.image = 'https://clash-of-degens.netlify.app/media/micromachine.jpg';
 
 mode.config = {

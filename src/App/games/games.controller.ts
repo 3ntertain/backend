@@ -26,7 +26,5 @@ export class GamesController {
     const data = this.gamesService.getList();
 
     const toto = JSON.stringify(data);
-
-    console.log(toto);
   }
 }
