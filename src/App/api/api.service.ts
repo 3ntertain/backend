@@ -31,38 +31,62 @@ export class ApiService {
 
     let dropAddress;
 
-    try {
-      dropAddress = await this.thirdWeb.createDrop({
-        name: param.title,
-        symbol: param.symbol,
-        description: param.description,
-        totalSupply: param.slots,
-        image: param.ticket,
-      });
-    } catch (e) {
-      console.log('THE ERROR' + e);
-    }
+    while (!dropAddress) {
+      console.log('try to create drop');
 
-    await setTimeout(() => {}, 1000);
+      try {
+        dropAddress = await this.thirdWeb.createDrop({
+          name: param.title,
+          symbol: param.symbol,
+          description: param.description,
+          totalSupply: param.slots,
+          image: param.ticket,
+        });
+      } catch (e) {
+        console.log('THE ERROR' + e);
+      }
+    }
 
     if (!dropAddress) return;
 
     console.log('ready to set claim conditions', dropAddress);
 
-    await this.thirdWeb.setClaimConditions({
-      address: dropAddress,
-      price: param.price,
-      startTime: new Date(),
-    });
+    let txMint;
 
-    await this.thirdWeb.lazyMint({
-      address: dropAddress,
-      dateStart: param.start,
-      dateEnd: param.end,
-      rewardsDistribution: '33|1|1',
-      game: param.game.title,
-      symbol: param.game.symbol,
-    });
+    while (!txMint) {
+      console.log('try to set claim conditions');
+      try {
+        txMint = await this.thirdWeb.setClaimConditions({
+          address: dropAddress,
+          price: param.price,
+          startTime: new Date(),
+        });
+      } catch (e) {
+        console.log('THE ERROR' + e);
+      }
+    }
+
+    console.log('mint', txMint);
+
+    let txClaim;
+
+    while (!txClaim) {
+      try {
+        txClaim = await this.thirdWeb.lazyMint({
+          address: dropAddress,
+          dateStart: param.start,
+          dateEnd: param.end,
+          rewardsDistribution: '33|1|1',
+          game: param.game.name,
+          symbol: param.game.symbol,
+          creator: param.creator,
+        });
+      } catch (e) {
+        console.log('THE ERROR' + e);
+      }
+    }
+
+    console.log('claim', txClaim);
 
     console.log('success: ' + dropAddress);
 
@@ -111,11 +135,6 @@ export class ApiService {
     event.rewardRules = new RewardRules(programNft.getMetadataValue('rewards'));
 
     event.distributeRewards();
-
-    console.log('*************');
-    console.log('*************');
-    console.log('*************');
-    console.log(event);
 
     return JSON.parse(JSON.stringify(event));
   }

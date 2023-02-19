@@ -91,10 +91,110 @@ export const difficulty = new ModeSettingSelect({
   ],
 });
 
+export const car = new ModeSettingSelect({
+  name: 'Model',
+  label: 'model',
+  description: 'Select a car model',
+  type: 'select',
+  options: [
+    {
+      value: 'ranger',
+      label: 'Ranger',
+    },
+    {
+      value: 'muscle',
+      label: 'Muscle',
+    },
+    {
+      value: 'Both',
+      label: 'Both',
+    },
+  ],
+});
+
+export const retries = new ModeSettingSelect({
+  name: 'Retries',
+  label: 'retries',
+  description: 'Select the amount of retries',
+  type: 'select',
+  options: [
+    {
+      value: 5,
+      label: '5',
+    },
+    {
+      value: 15,
+      label: '15',
+    },
+    {
+      value: 30,
+      label: '30',
+    },
+    {
+      value: 0,
+      label: 'Infinite',
+    },
+    {
+      value: 1,
+      label: 'One chance - Death Match',
+    },
+  ],
+});
+
+export const boost = new ModeSettingSelect({
+  name: 'Boost',
+  label: 'boost',
+  description: 'Select the duration for the boost',
+  type: 'select',
+  options: [
+    {
+      value: 5,
+      label: '5 s',
+    },
+    {
+      value: 10,
+      label: '10 s',
+    },
+    {
+      value: 15,
+      label: '15 s',
+    },
+    {
+      value: 20,
+      label: '20 s',
+    },
+    {
+      value: 0,
+      label: 'No boost',
+    },
+  ],
+});
+
 export const drift = new ModeSettingCheckbox({
   name: 'Drift',
   label: 'drift',
   description: 'Enable drift',
   type: 'checkbox',
   checked: false,
+});
+
+export const duration = new ModeSettingSelect({
+  name: 'Round Duration',
+  label: 'countdown',
+  description: 'Select the duration for a round',
+  type: 'select',
+  options: [
+    {
+      value: 30,
+      label: '30 s',
+    },
+    {
+      value: 45,
+      label: '45 s',
+    },
+    {
+      value: 60,
+      label: '1 min',
+    },
+  ],
 });
