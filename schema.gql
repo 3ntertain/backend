@@ -121,6 +121,7 @@ input CreateGameInput {
   name: String!
   symbol: String!
   logo: String!
+  image: Upload!
   banner: String!
   background: String!
   type: String!
@@ -130,10 +131,14 @@ input CreateGameInput {
   discord: String
 }
 
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
 input UpdateGameInput {
   name: String
   symbol: String
   logo: String
+  image: Upload
   banner: String
   background: String
   type: String

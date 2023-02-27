@@ -1,4 +1,13 @@
 import { Field, InputType } from '@nestjs/graphql';
+import { Stream } from 'stream';
+import * as GraphQLUpload from 'graphql-upload/GraphQLUpload.js';
+
+export interface FileUpload {
+  filename: string;
+  mimetype: string;
+  encoding: string;
+  createReadStream: () => Stream;
+}
 
 @InputType()
 export class CreateGameInput {
@@ -9,7 +18,10 @@ export class CreateGameInput {
   symbol: string;
 
   @Field()
-  logo: string;
+  logo?: string;
+
+  @Field(() => GraphQLUpload)
+  image: Promise<FileUpload>;
 
   @Field()
   banner: string;

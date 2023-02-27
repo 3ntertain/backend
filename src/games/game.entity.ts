@@ -17,6 +17,10 @@ export class Game {
   @Field()
   symbol: string;
 
+  // @Column()
+  // @Field(() => String)
+  // image: string;
+
   @Column()
   @Field()
   logo: string;
