@@ -63,16 +63,26 @@ type Mode {
   settings: [Setting!]!
   pricings: [Pricing!]!
   happenings: [Happening!]!
+  happeningspublicactive: Happening!
 }
 
 type Happening {
   id: Int!
+  address: String!
+  public: Boolean!
   name: String!
   description: String
   start: DateTime!
   end: DateTime!
+  startIn: Int!
+  endIn: Int!
   price: Float!
   slots: Int!
+  players: Int!
+  availableSlots: Int!
+  creator: String!
+  ticket: String!
+  status: String!
   creatorFee: Int!
   configuration: String
   token: String
@@ -96,6 +106,9 @@ type Query {
   pricings: [Pricing!]!
   pricing(id: Int!): Pricing!
   happenings: [Happening!]!
+  happeningspublic: [Happening!]!
+  findactive: [Happening!]!
+  findpublicactive: [Happening!]!
   happening(id: Int!): Happening!
 }
 
@@ -198,29 +211,37 @@ input UpdatePricingInput {
 
 input CreateHappeningInput {
   name: String!
+  public: Boolean! = false
   description: String
   start: DateTime!
   end: DateTime!
   price: Float!
   slots: Int!
+  players: Int!
+  creator: String!
   creatorFee: Int!
   configuration: String
   token: String
   rewards: String
+  ticket: String!
   modeId: Int!
 }
 
 input UpdateHappeningInput {
   name: String
+  public: Boolean = false
   description: String
   start: DateTime
   end: DateTime
   price: Float
   slots: Int
+  players: Int
+  creator: String
   creatorFee: Int
   configuration: String
   token: String
   rewards: String
+  ticket: String
   modeId: Int
   id: Int!
 }

@@ -5,6 +5,9 @@ export class CreateHappeningInput {
   @Field()
   name: string;
 
+  @Field({ defaultValue: false })
+  public: boolean;
+
   @Field({ nullable: true })
   description?: string;
 
@@ -21,6 +24,12 @@ export class CreateHappeningInput {
   slots: number;
 
   @Field((type) => Int)
+  players: number;
+
+  @Field()
+  creator: string;
+
+  @Field((type) => Int)
   creatorFee: number;
 
   @Field({ nullable: true })
@@ -31,6 +40,9 @@ export class CreateHappeningInput {
 
   @Field({ nullable: true })
   rewards?: string;
+
+  @Field()
+  ticket: string;
 
   @Field((type) => Int)
   modeId: number;

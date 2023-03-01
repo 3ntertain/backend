@@ -1,6 +1,13 @@
 import { ObjectType, Field, Int, Float } from '@nestjs/graphql';
+import { IsOptional } from 'class-validator';
 import { Mode } from 'src/modes/mode.entity';
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  AfterLoad,
+  Column,
+  Entity,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity()
 @ObjectType()
@@ -8,6 +15,14 @@ export class Happening {
   @PrimaryGeneratedColumn()
   @Field((type) => Int)
   id: number;
+
+  @Column()
+  @Field()
+  address: string;
+
+  @Column()
+  @Field({ defaultValue: false })
+  public: boolean;
 
   @Column()
   @Field()
@@ -25,6 +40,14 @@ export class Happening {
   @Field((type) => Date)
   end: Date;
 
+  @IsOptional()
+  @Field((type) => Int)
+  startIn: number;
+
+  @IsOptional()
+  @Field((type) => Int)
+  endIn: number;
+
   @Column('decimal', { precision: 6, scale: 4 })
   @Field((type) => Float)
   price: number;
@@ -32,6 +55,26 @@ export class Happening {
   @Column()
   @Field((type) => Int)
   slots: number;
+
+  @Column()
+  @Field((type) => Int)
+  players: number;
+
+  @IsOptional()
+  @Field((type) => Int)
+  availableSlots: number;
+
+  @Column()
+  @Field()
+  creator: string;
+
+  @Column()
+  @Field()
+  ticket: string;
+
+  @IsOptional()
+  @Field()
+  status: string;
 
   @Column()
   @Field((type) => Int)
@@ -53,9 +96,32 @@ export class Happening {
   @Field((type) => Int)
   modeId: number;
 
-  @ManyToOne((type) => Mode, (mode) => mode.pricings, {
+  @ManyToOne((type) => Mode, (mode) => mode.happenings, {
     onDelete: 'CASCADE',
   })
   @Field((type) => Mode)
   mode: Mode;
+
+  @AfterLoad()
+  generateStatus(): void {
+    this.status = this.start > new Date() ? 'upcoming' : 'ongoing';
+    this.status = this.end < new Date() ? 'ended' : 'ongoing';
+
+    this.availableSlots = this.slots - this.players;
+
+    this.endIn = 0;
+    this.startIn = 0;
+
+    if (this.status !== 'ended') {
+      this.endIn = Math.ceil(
+        new Date(this.end).getTime() - new Date().getTime(),
+      );
+    }
+
+    if (this.status == 'upcoming') {
+      this.startIn = Math.ceil(
+        new Date().getTime() - new Date(this.start).getTime(),
+      );
+    }
+  }
 }

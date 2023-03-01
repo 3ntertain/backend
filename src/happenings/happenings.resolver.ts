@@ -30,6 +30,21 @@ export class HappeningsResolver {
     return this.happeningsService.findAll();
   }
 
+  @Query(() => [Happening], { name: 'happeningspublic' })
+  findPublic() {
+    return this.happeningsService.findPublic();
+  }
+
+  @Query(() => [Happening], { name: 'findactive' })
+  findActive() {
+    return this.happeningsService.findActive();
+  }
+
+  @Query(() => [Happening], { name: 'findpublicactive' })
+  findPublicActive() {
+    return this.happeningsService.findPublicActive();
+  }
+
   @Query(() => Happening, { name: 'happening' })
   findOne(@Args('id', { type: () => Int }) id: FindOptionsWhere<Happening>) {
     return this.happeningsService.findOne(id);

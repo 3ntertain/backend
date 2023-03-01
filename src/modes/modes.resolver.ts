@@ -60,8 +60,13 @@ export class ModesResolver {
     return this.modesService.getPricings(mode.id);
   }
 
-  @ResolveField(() => Event)
+  @ResolveField(() => Happening)
   happenings(@Parent() mode: Mode): Promise<Happening[]> {
     return this.modesService.getHappenings(mode.id);
+  }
+
+  @ResolveField(() => Happening)
+  happeningspublicactive(@Parent() mode: Mode): Promise<Happening[]> {
+    return this.modesService.getPublicActiveHappenings(mode.id);
   }
 }
