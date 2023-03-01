@@ -28,8 +28,8 @@ export class SettingsService {
     return this.settingsRepository.findBy({ modeId: modeId });
   }
 
-  findOne(id: FindOptionsWhere<Setting>): Promise<Setting> {
-    return this.settingsRepository.findOneByOrFail(id);
+  findOne(id: number): Promise<Setting> {
+    return this.settingsRepository.findOneByOrFail({ id: id });
   }
 
   async update(id: number, updateSettingInput: UpdateSettingInput) {

@@ -6,12 +6,6 @@ export class CreateModeInput {
   name: string;
 
   @Field()
-  banner: string;
-
-  @Field()
-  background: string;
-
-  @Field()
   createApiUrl: string;
 
   @Field()

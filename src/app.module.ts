@@ -11,6 +11,8 @@ import { SettingsModule } from './settings/settings.module';
 import { ConfigModule } from '@nestjs/config';
 import { PricingsModule } from './pricings/pricings.module';
 import { HappeningsModule } from './happenings/happenings.module';
+import { UploadModule } from './upload/upload.module';
+import { UploadService } from './upload/upload.service';
 
 @Module({
   imports: [
@@ -21,12 +23,6 @@ import { HappeningsModule } from './happenings/happenings.module';
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'schema.gql'),
     }),
-    // TypeOrmModule.forRoot({
-    //   type: 'sqlite',
-    //   database: ':memory:',
-    //   entities: ['dist/**/*.entity{.ts,.js}'],
-    //   synchronize: true,
-    // }),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DB_HOST,
@@ -42,8 +38,9 @@ import { HappeningsModule } from './happenings/happenings.module';
     SettingsModule,
     PricingsModule,
     HappeningsModule,
+    UploadModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, UploadService],
 })
 export class AppModule {}

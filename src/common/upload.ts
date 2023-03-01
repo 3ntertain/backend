@@ -1,28 +1,49 @@
-require('dotenv').config();
+import { S3Client } from '@aws-sdk/client-s3';
+import { PutObjectCommand } from '@aws-sdk/client-s3';
 
-const S3 = require('aws-sdk/clients/s3');
+const bucketName = 'clash-of-degens';
+const region = 'us-east-2';
 
-const bucketName = process.env.AWS_BUCKET_NAME;
-const region = process.env.AWS_BUCKET_REGION;
-const accessKeyId = process.env.AWS_ACCESS_KEY;
-const secretAccessKey = process.env.AWS_SECRET_KEY;
-
-const s3 = new S3({
-  region,
-  accessKeyId,
-  secretAccessKey,
+const s3Client = new S3Client({
+  region: region,
 });
+
+async function streamToBuffer(stream: any): Promise<Buffer> {
+  return new Promise<Buffer>((resolve, reject) => {
+    const _buf: any[] = [];
+
+    stream.on('data', (chunk) => _buf.push(chunk));
+    stream.on('end', () => resolve(Buffer.concat(_buf)));
+    stream.on('error', (err) => reject(err));
+  });
+}
 
 export async function uploadFile(createReadStream, filename) {
   const body = await createReadStream();
+  const buffer = await streamToBuffer(body);
+
   const extention = filename.split('.').pop();
   const newFilename = `${Date.now()}.${extention}`;
 
-  const uploadParams = {
+  const bucketParams = {
     Bucket: bucketName,
-    Body: body,
+    Body: buffer,
     Key: newFilename,
   };
 
-  return s3.upload(uploadParams).promise();
+  try {
+    await s3Client.send(new PutObjectCommand(bucketParams));
+
+    const s3Url =
+      'https://' +
+      bucketName +
+      '.s3.' +
+      region +
+      '.amazonaws.com/' +
+      newFilename;
+
+    return s3Url;
+  } catch (err) {
+    console.log('Error', err);
+  }
 }

@@ -40,8 +40,8 @@ export class ModesService {
     return this.modesRepository.findOneByOrFail({ id: id });
   }
 
-  async update(id: number, updateModeInput: UpdateModeInput) {
-    await this.modesRepository.update(id, updateModeInput);
+  update(id: number, updateModeInput: UpdateModeInput) {
+    this.modesRepository.update(id, updateModeInput);
     return this.modesRepository.findOneByOrFail({ id: id });
   }
 

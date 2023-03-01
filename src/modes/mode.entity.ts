@@ -2,6 +2,9 @@ import { ObjectType, Field, Int } from '@nestjs/graphql';
 import { Game } from '../games/game.entity';
 import { Setting } from '../settings/setting.entity';
 import {
+  AfterInsert,
+  AfterLoad,
+  AfterUpdate,
   Column,
   Entity,
   ManyToOne,
@@ -10,6 +13,8 @@ import {
 } from 'typeorm';
 import { Pricing } from 'src/pricings/pricing.entity';
 import { Happening } from 'src/happenings/happening.entity';
+import { awsUrl } from '../common/aws-path';
+import { IsOptional } from 'class-validator';
 
 @Entity()
 @ObjectType()
@@ -22,11 +27,11 @@ export class Mode {
   @Field()
   name: string;
 
-  @Column()
+  @IsOptional()
   @Field()
   banner: string;
 
-  @Column()
+  @IsOptional()
   @Field()
   background: string;
 
@@ -71,4 +76,10 @@ export class Mode {
   @OneToMany((type) => Happening, (happening) => happening.mode)
   @Field((type) => [Happening])
   happenings: Happening[];
+
+  @AfterLoad()
+  generateAwsUrls(): void {
+    this.banner = awsUrl(`mode-${this.id}-banner`);
+    this.background = awsUrl(`mode-${this.id}-background`);
+  }
 }

@@ -8,7 +8,6 @@ import {
   Parent,
 } from '@nestjs/graphql';
 import { Mode } from 'src/modes/mode.entity';
-import { FindOneOptions, FindOptionsWhere } from 'typeorm';
 import { CreateGameInput } from './dto/create-game.input';
 import { UpdateGameInput } from './dto/update-game.input';
 import { Game } from './game.entity';

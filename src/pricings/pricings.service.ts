@@ -28,8 +28,8 @@ export class PricingsService {
     return this.pricingRepository.findBy({ modeId: modeId });
   }
 
-  findOne(id: FindOptionsWhere<Pricing>): Promise<Pricing> {
-    return this.pricingRepository.findOneByOrFail(id);
+  findOne(id: number): Promise<Pricing> {
+    return this.pricingRepository.findOneByOrFail({ id: id });
   }
 
   async update(id: number, updatePricingInput: UpdatePricingInput) {

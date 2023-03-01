@@ -1,6 +1,16 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { Mode } from '../modes/mode.entity';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  AfterInsert,
+  AfterLoad,
+  AfterUpdate,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { IsOptional } from 'class-validator';
+import { awsUrl } from '../common/aws-path';
 
 @Entity()
 @ObjectType()
@@ -17,19 +27,15 @@ export class Game {
   @Field()
   symbol: string;
 
-  // @Column()
-  // @Field(() => String)
-  // image: string;
-
-  @Column()
+  @IsOptional()
   @Field()
   logo: string;
 
-  @Column()
+  @IsOptional()
   @Field()
   banner: string;
 
-  @Column()
+  @IsOptional()
   @Field()
   background: string;
 
@@ -56,4 +62,11 @@ export class Game {
   @OneToMany((type) => Mode, (mode) => mode.game)
   @Field((type) => [Mode])
   modes: Mode[];
+
+  @AfterLoad()
+  generateAwsUrls(): void {
+    this.logo = awsUrl(`game-${this.id}-logo`);
+    this.banner = awsUrl(`game-${this.id}-banner`);
+    this.background = awsUrl(`game-${this.id}-background`);
+  }
 }

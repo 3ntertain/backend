@@ -31,7 +31,7 @@ export class SettingsResolver {
   }
 
   @Query(() => Setting, { name: 'setting' })
-  findOne(@Args('id', { type: () => Int }) id: FindOptionsWhere<Setting>) {
+  findOne(@Args('id', { type: () => Int }) id: number) {
     return this.settingsService.findOne(id);
   }
 

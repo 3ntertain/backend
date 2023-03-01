@@ -31,7 +31,7 @@ export class PricingsResolver {
   }
 
   @Query(() => Pricing, { name: 'pricing' })
-  findOne(@Args('id', { type: () => Int }) id: FindOptionsWhere<Pricing>) {
+  findOne(@Args('id', { type: () => Int }) id: number) {
     return this.pricingsService.findOne(id);
   }
 

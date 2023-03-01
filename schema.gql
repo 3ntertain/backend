@@ -115,15 +115,12 @@ type Mutation {
   createHappening(createHappeningInput: CreateHappeningInput!): Happening!
   updateHappening(updateHappeningInput: UpdateHappeningInput!): Happening!
   removeHappening(id: Int!): Happening!
+  createUpload(createUploadInput: CreateUploadInput!): Boolean!
 }
 
 input CreateGameInput {
   name: String!
   symbol: String!
-  logo: String!
-  image: Upload!
-  banner: String!
-  background: String!
   type: String!
   url: String!
   description: String
@@ -131,16 +128,9 @@ input CreateGameInput {
   discord: String
 }
 
-"""The `Upload` scalar type represents a file upload."""
-scalar Upload
-
 input UpdateGameInput {
   name: String
   symbol: String
-  logo: String
-  image: Upload
-  banner: String
-  background: String
   type: String
   url: String
   description: String
@@ -151,8 +141,6 @@ input UpdateGameInput {
 
 input CreateModeInput {
   name: String!
-  banner: String!
-  background: String!
   createApiUrl: String!
   getApiUrl: String!
   active: Boolean!
@@ -163,8 +151,6 @@ input CreateModeInput {
 
 input UpdateModeInput {
   name: String
-  banner: String
-  background: String
   createApiUrl: String
   getApiUrl: String
   active: Boolean
@@ -237,4 +223,9 @@ input UpdateHappeningInput {
   rewards: String
   modeId: Int
   id: Int!
+}
+
+input CreateUploadInput {
+  name: String!
+  file: String!
 }
