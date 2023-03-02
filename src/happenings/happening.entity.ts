@@ -104,8 +104,13 @@ export class Happening {
 
   @AfterLoad()
   generateStatus(): void {
-    this.status = this.start > new Date() ? 'upcoming' : 'ongoing';
-    this.status = this.end < new Date() ? 'ended' : 'ongoing';
+    this.status = 'upcoming';
+    if (new Date(this.start) < new Date()) {
+      this.status = 'ongoing';
+    }
+    if (new Date(this.end) < new Date()) {
+      this.status = 'ended';
+    }
 
     this.availableSlots = this.slots - this.players;
 
@@ -114,13 +119,13 @@ export class Happening {
 
     if (this.status !== 'ended') {
       this.endIn = Math.ceil(
-        new Date(this.end).getTime() - new Date().getTime(),
+        (new Date(this.end).getTime() - new Date().getTime()) / 1000,
       );
     }
 
     if (this.status == 'upcoming') {
       this.startIn = Math.ceil(
-        new Date().getTime() - new Date(this.start).getTime(),
+        (new Date(this.start).getTime() - new Date().getTime()) / 1000,
       );
     }
   }

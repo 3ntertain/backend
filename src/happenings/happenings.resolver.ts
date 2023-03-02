@@ -19,10 +19,10 @@ export class HappeningsResolver {
   constructor(private readonly happeningsService: HappeningsService) {}
 
   @Mutation(() => Happening)
-  createHappening(
+  async createHappening(
     @Args('createHappeningInput') createHappeningInput: CreateHappeningInput,
   ) {
-    return this.happeningsService.create(createHappeningInput);
+    return await this.happeningsService.create(createHappeningInput);
   }
 
   @Query(() => [Happening], { name: 'happenings' })

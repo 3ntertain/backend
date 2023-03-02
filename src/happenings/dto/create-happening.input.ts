@@ -11,6 +11,9 @@ export class CreateHappeningInput {
   @Field({ nullable: true })
   description?: string;
 
+  @Field({ nullable: true })
+  address?: string;
+
   @Field((type) => Date)
   start: Date;
 
@@ -22,9 +25,6 @@ export class CreateHappeningInput {
 
   @Field((type) => Int)
   slots: number;
-
-  @Field((type) => Int)
-  players: number;
 
   @Field()
   creator: string;

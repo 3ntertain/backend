@@ -213,11 +213,11 @@ input CreateHappeningInput {
   name: String!
   public: Boolean! = false
   description: String
+  address: String
   start: DateTime!
   end: DateTime!
   price: Float!
   slots: Int!
-  players: Int!
   creator: String!
   creatorFee: Int!
   configuration: String
@@ -231,11 +231,11 @@ input UpdateHappeningInput {
   name: String
   public: Boolean = false
   description: String
+  address: String
   start: DateTime
   end: DateTime
   price: Float
   slots: Int
-  players: Int
   creator: String
   creatorFee: Int
   configuration: String
