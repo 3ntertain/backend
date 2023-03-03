@@ -109,7 +109,7 @@ type Query {
   happeningspublic: [Happening!]!
   findactive: [Happening!]!
   findpublicactive: [Happening!]!
-  happening(id: Int!): Happening!
+  happening(address: String!): Happening!
 }
 
 type Mutation {

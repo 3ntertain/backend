@@ -22,25 +22,23 @@ export class HappeningsService {
     const mode = await this.modesService.findOne(createHappeningInput.modeId);
     const game = await this.modesService.getGame(mode.gameId);
 
-    // const dropAddress = await createCollection({
-    //   name: createHappeningInput.name,
-    //   symbol: game.symbol,
-    //   description: createHappeningInput.description,
-    //   slots: createHappeningInput.slots,
-    //   price: createHappeningInput.price,
-    //   start: createHappeningInput.start,
-    //   end: createHappeningInput.end,
-    //   game: game.name,
-    //   mode: mode.name,
-    //   nftPicture: createHappeningInput.ticket,
-    //   creator: createHappeningInput.creator,
-    //   creatorFee: createHappeningInput.creatorFee,
-    //   rewardsDistribution: createHappeningInput.rewards,
-    // });
+    const dropAddress = await createCollection({
+      name: createHappeningInput.name,
+      symbol: game.symbol,
+      description: createHappeningInput.description,
+      slots: createHappeningInput.slots,
+      price: createHappeningInput.price,
+      start: createHappeningInput.start,
+      end: createHappeningInput.end,
+      game: game.name,
+      mode: mode.name,
+      nftPicture: createHappeningInput.ticket,
+      creator: createHappeningInput.creator,
+      creatorFee: createHappeningInput.creatorFee,
+      rewardsDistribution: createHappeningInput.rewards,
+    });
 
-    createHappeningInput.address = 'dropAddress';
-
-    // console.log('create happening input with add: ', dropAddress);
+    createHappeningInput.address = dropAddress;
 
     const newHappening = this.happeningRepository.create(createHappeningInput);
 
@@ -114,8 +112,8 @@ export class HappeningsService {
     });
   }
 
-  findOne(id: FindOptionsWhere<Happening>): Promise<Happening> {
-    return this.happeningRepository.findOneByOrFail(id);
+  findOne(address: string): Promise<Happening> {
+    return this.happeningRepository.findOneByOrFail({ address: address });
   }
 
   async update(id: number, updateHappeningInput: UpdateHappeningInput) {

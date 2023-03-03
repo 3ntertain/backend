@@ -46,8 +46,8 @@ export class HappeningsResolver {
   }
 
   @Query(() => Happening, { name: 'happening' })
-  findOne(@Args('id', { type: () => Int }) id: FindOptionsWhere<Happening>) {
-    return this.happeningsService.findOne(id);
+  findOne(@Args('address', { type: () => String }) address: string) {
+    return this.happeningsService.findOne(address);
   }
 
   @Mutation(() => Happening)
