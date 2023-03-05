@@ -78,7 +78,7 @@ export const createCollection = async ({
     }
   }
 
-  console.log('LAZY MINTED' + txClaim);
+  console.log('MINTED' + txClaim);
 
   return dropAddress;
 };

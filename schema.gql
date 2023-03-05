@@ -78,7 +78,6 @@ type Happening {
   endIn: Int!
   price: Float!
   slots: Int!
-  players: Int!
   availableSlots: Int!
   creator: String!
   ticket: String!
@@ -244,6 +243,7 @@ input UpdateHappeningInput {
   ticket: String
   modeId: Int
   id: Int!
+  availableSlots: Int!
 }
 
 input CreateUploadInput {

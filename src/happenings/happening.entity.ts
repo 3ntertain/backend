@@ -58,10 +58,6 @@ export class Happening {
 
   @Column()
   @Field((type) => Int)
-  players: number;
-
-  @IsOptional()
-  @Field((type) => Int)
   availableSlots: number;
 
   @Column()
@@ -111,8 +107,6 @@ export class Happening {
     if (new Date(this.end) < new Date()) {
       this.status = 'ended';
     }
-
-    this.availableSlots = this.slots - this.players;
 
     this.endIn = 0;
     this.startIn = 0;

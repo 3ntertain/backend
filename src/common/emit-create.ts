@@ -7,9 +7,15 @@ export const emitCreate = async (happening, mode, game) => {
   data.end = happening.end;
   data.name = happening.name;
   data.description = happening.description;
-  data.address = happening.address;
+  data.nft_ticket_address = happening.address;
 
-  // TEMP FOR ALR
+  // Fix for ALR
+  data.title = data.name;
+
+  console.log(url);
+
+  console.log('CALL NOJI');
+  console.log('DATA', data);
 
   try {
     const results = await fetch(url, {
@@ -17,10 +23,14 @@ export const emitCreate = async (happening, mode, game) => {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({ tournament: data }),
     });
 
-    return await results.json();
+    const resultData = await results.json();
+
+    console.log('RESULT', resultData);
+
+    return resultData;
   } catch (error) {
     console.log(error);
   }

@@ -119,6 +119,7 @@ export class ThirdWeb {
       i++;
     }
 
+    console.log('LAZY MINT METADATA', lazyMintMetaData);
     // And lazy mint NFTs to your program
     const tx = await program.lazyMint(lazyMintMetaData);
 
