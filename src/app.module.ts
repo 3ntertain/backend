@@ -5,6 +5,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { GamesModule } from './games/games.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { InMemoryLRUCache } from '@apollo/utils.keyvaluecache';
+
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ModesModule } from './modes/modes.module';
 import { SettingsModule } from './settings/settings.module';
@@ -22,6 +24,7 @@ import { UploadService } from './upload/upload.service';
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'schema.gql'),
+      cache: new InMemoryLRUCache(),
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
