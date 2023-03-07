@@ -64,9 +64,4 @@ export class ModesResolver {
   happenings(@Parent() mode: Mode): Promise<Happening[]> {
     return this.modesService.getHappenings(mode.id);
   }
-
-  @ResolveField(() => Happening)
-  happeningspublicactive(@Parent() mode: Mode): Promise<Happening[]> {
-    return this.modesService.getPublicActiveHappenings(mode.id);
-  }
 }

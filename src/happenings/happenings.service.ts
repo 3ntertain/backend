@@ -47,69 +47,42 @@ export class HappeningsService {
     return this.happeningRepository.save(newHappening);
   }
 
-  findAll() {
-    return this.happeningRepository.find();
-  }
-
-  findPublic() {
+  findOngoing() {
     return this.happeningRepository.find({
       where: {
-        public: true,
-      },
-    });
-  }
-
-  findActive() {
-    return this.happeningRepository.find({
-      where: {
+        start: LessThan(new Date()),
         end: MoreThan(new Date()),
       },
-    });
-  }
-
-  findPublicActive() {
-    return this.happeningRepository.find({
-      where: {
-        public: true,
-        end: MoreThan(new Date()),
+      order: {
+        end: 'ASC',
       },
     });
   }
 
-  getCountAll() {
-    return this.happeningRepository.count();
+  findEnded() {
+    return this.happeningRepository.find({
+      where: {
+        end: LessThan(new Date()),
+      },
+      order: {
+        end: 'DESC',
+      },
+    });
+  }
+
+  findUpcoming() {
+    return this.happeningRepository.find({
+      where: {
+        start: MoreThan(new Date()),
+      },
+      order: {
+        start: 'ASC',
+      },
+    });
   }
 
   findAllByModeId(modeId: number) {
     return this.happeningRepository.findBy({ modeId: modeId });
-  }
-
-  findPublicByModeId(modeId: number) {
-    return this.happeningRepository.find({
-      where: {
-        modeId: modeId,
-        public: true,
-      },
-    });
-  }
-
-  findActiveByModeId(modeId: number) {
-    return this.happeningRepository.find({
-      where: {
-        modeId: modeId,
-        end: MoreThan(new Date()),
-      },
-    });
-  }
-
-  findPublicActiveByModeId(modeId: number) {
-    return this.happeningRepository.find({
-      where: {
-        modeId: modeId,
-        end: MoreThan(new Date()),
-        public: true,
-      },
-    });
   }
 
   findOne(address: string): Promise<Happening> {

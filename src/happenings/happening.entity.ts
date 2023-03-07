@@ -3,6 +3,7 @@ import { IsOptional } from 'class-validator';
 import { Mode } from 'src/modes/mode.entity';
 import {
   AfterLoad,
+  BeforeInsert,
   Column,
   Entity,
   ManyToOne,
@@ -99,6 +100,7 @@ export class Happening {
   mode: Mode;
 
   @AfterLoad()
+  @BeforeInsert()
   generateStatus(): void {
     this.status = 'upcoming';
     if (new Date(this.start) < new Date()) {

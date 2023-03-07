@@ -66,8 +66,4 @@ export class ModesService {
   getHappenings(modeId: number) {
     return this.happeningsService.findAllByModeId(modeId);
   }
-
-  getPublicActiveHappenings(modeId: number) {
-    return this.happeningsService.findPublicActiveByModeId(modeId);
-  }
 }

@@ -25,24 +25,19 @@ export class HappeningsResolver {
     return await this.happeningsService.create(createHappeningInput);
   }
 
-  @Query(() => [Happening], { name: 'happenings' })
-  findAll() {
-    return this.happeningsService.findAll();
+  @Query(() => [Happening], { name: 'ongoingHappenings' })
+  findOngoing() {
+    return this.happeningsService.findOngoing();
   }
 
-  @Query(() => [Happening], { name: 'happeningspublic' })
-  findPublic() {
-    return this.happeningsService.findPublic();
+  @Query(() => [Happening], { name: 'endedHappenings' })
+  findEnded() {
+    return this.happeningsService.findEnded();
   }
 
-  @Query(() => [Happening], { name: 'findactive' })
-  findActive() {
-    return this.happeningsService.findActive();
-  }
-
-  @Query(() => [Happening], { name: 'findpublicactive' })
-  findPublicActive() {
-    return this.happeningsService.findPublicActive();
+  @Query(() => [Happening], { name: 'upcomingHappenings' })
+  findUpcoming() {
+    return this.happeningsService.findUpcoming();
   }
 
   @Query(() => Happening, { name: 'happening' })

@@ -63,7 +63,6 @@ type Mode {
   settings: [Setting!]!
   pricings: [Pricing!]!
   happenings: [Happening!]!
-  happeningspublicactive: Happening!
 }
 
 type Happening {
@@ -104,10 +103,9 @@ type Query {
   setting(id: Int!): Setting!
   pricings: [Pricing!]!
   pricing(id: Int!): Pricing!
-  happenings: [Happening!]!
-  happeningspublic: [Happening!]!
-  findactive: [Happening!]!
-  findpublicactive: [Happening!]!
+  ongoingHappenings: [Happening!]!
+  endedHappenings: [Happening!]!
+  upcomingHappenings: [Happening!]!
   happening(address: String!): Happening!
 }
 
