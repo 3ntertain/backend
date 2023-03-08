@@ -99,6 +99,10 @@ export class Happening {
   @Field((type) => Mode)
   mode: Mode;
 
+  @IsOptional()
+  @Field({ nullable: true })
+  leaderboard?: string;
+
   @AfterLoad()
   @BeforeInsert()
   generateStatus(): void {

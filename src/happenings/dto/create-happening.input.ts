@@ -26,6 +26,9 @@ export class CreateHappeningInput {
   @Field((type) => Int)
   slots: number;
 
+  @Field(() => Int)
+  availableSlots: number;
+
   @Field()
   creator: string;
 

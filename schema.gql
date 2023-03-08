@@ -87,6 +87,7 @@ type Happening {
   rewards: String
   modeId: Int!
   mode: Mode!
+  leaderboard: String
 }
 
 """
@@ -107,6 +108,7 @@ type Query {
   endedHappenings: [Happening!]!
   upcomingHappenings: [Happening!]!
   happening(address: String!): Happening!
+  leaderboard(address: String!): [Happening!]!
 }
 
 type Mutation {
@@ -215,6 +217,7 @@ input CreateHappeningInput {
   end: DateTime!
   price: Float!
   slots: Int!
+  availableSlots: Int!
   creator: String!
   creatorFee: Int!
   configuration: String
@@ -233,6 +236,7 @@ input UpdateHappeningInput {
   end: DateTime
   price: Float
   slots: Int
+  availableSlots: Int
   creator: String
   creatorFee: Int
   configuration: String
@@ -241,7 +245,6 @@ input UpdateHappeningInput {
   ticket: String
   modeId: Int
   id: Int!
-  availableSlots: Int!
 }
 
 input CreateUploadInput {

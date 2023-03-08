@@ -45,6 +45,16 @@ export class HappeningsResolver {
     return this.happeningsService.findOne(address);
   }
 
+  @Query(() => [Happening], { name: 'leaderboard' })
+  async getLeaderboard(
+    @Args('address', { type: () => String }) address: string,
+  ) {
+    const test = await this.happeningsService.getLeaderboard(address);
+
+    console.log(test);
+    return test;
+  }
+
   @Mutation(() => Happening)
   updateHappening(
     @Args('updateHappeningInput') updateHappeningInput: UpdateHappeningInput,

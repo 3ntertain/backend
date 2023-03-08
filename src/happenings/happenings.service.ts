@@ -103,4 +103,31 @@ export class HappeningsService {
   getMode(modeId: number) {
     return this.modesService.findOne(modeId);
   }
+
+  async getLeaderboard(address: string) {
+    const happening = await this.happeningRepository.findOneByOrFail({
+      address: address,
+    });
+
+    return happening;
+
+    const mode = await this.modesService.findOne(happening.modeId);
+    const url = mode.getApiUrl.replace('{address}', happening.address);
+    try {
+      const results = await fetch(url, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const data = await results.json();
+      happening;
+      // happening.leaderboard = JSON.stringify(data.rankings);
+
+      return happening;
+    } catch (error) {
+      console.log(error);
+    }
+  }
 }
