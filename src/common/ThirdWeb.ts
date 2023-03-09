@@ -42,7 +42,7 @@ export class ThirdWeb {
         maxClaimable: supply,
         price: price,
         startTime: startTime ? startTime : new Date(),
-        sellerFeeBasisPoints: 5,
+        sellerFeeBasisPoints: 500,
       });
     } catch (error) {
       // this.setClaimConditions({ address, price, startTime });
