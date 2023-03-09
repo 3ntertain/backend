@@ -38,7 +38,7 @@ export const createCollection = async ({
 
 export const setClaim = async ({ price, dropAddress }) => {
   let txMint;
-  let loops = 10;
+  let loops = 5;
 
   while (!txMint) {
     loops--;
@@ -72,7 +72,7 @@ export const lazyMint = async ({
   rewardsDistribution,
 }) => {
   let txClaim;
-  let loops = 10;
+  let loops = 3;
 
   while (!txClaim) {
     loops--;
