@@ -22,9 +22,12 @@ export class SolanaWeb3 {
   constructor() {
     const decoded = bs58.decode(process.env.PRIVATE_KEY);
 
-    this.connection = new Connection(
-      clusterApiUrl((process.env.NETWORK as Cluster) || 'devnet'),
-    );
+    const APIUrl =
+      process.env.NETWORK === 'devnet'
+        ? clusterApiUrl(process.env.NETWORK as Cluster)
+        : process.env.NETWORK;
+
+    this.connection = new Connection(APIUrl);
 
     this.sender = Keypair.fromSecretKey(decoded);
   }
