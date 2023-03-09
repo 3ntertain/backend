@@ -71,7 +71,7 @@ export const createCollection = async ({
 
   let txClaim;
 
-  loops = SECURITY_WHILE_COUNT;
+  loops = 50;
 
   while (!txClaim) {
     loops--;
