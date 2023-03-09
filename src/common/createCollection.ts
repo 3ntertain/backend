@@ -17,7 +17,7 @@ export const createCollection = async ({
   creatorFee,
   rewardsDistribution,
 }) => {
-  const SECURITY_WHILE_COUNT = 10;
+  const SECURITY_WHILE_COUNT = 20;
   let loops = SECURITY_WHILE_COUNT;
 
   console.log('STARTING CREATE COLLECTION');
@@ -73,7 +73,7 @@ export const createCollection = async ({
 
   loops = SECURITY_WHILE_COUNT;
 
-  while (!txMint) {
+  while (!txClaim) {
     loops--;
     if (!loops) break;
 
