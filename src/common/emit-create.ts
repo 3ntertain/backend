@@ -13,11 +13,6 @@ export const emitCreate = async (happening, mode, game) => {
   // Fix for ALR
   data.title = data.name;
 
-  console.log(url);
-
-  console.log('CALL NOJI');
-  console.log('DATA', data);
-
   try {
     const results = await fetch(url, {
       method: 'POST',
@@ -28,8 +23,6 @@ export const emitCreate = async (happening, mode, game) => {
     });
 
     const resultData = await results.json();
-
-    console.log('RESULT', resultData);
 
     return resultData;
   } catch (error) {

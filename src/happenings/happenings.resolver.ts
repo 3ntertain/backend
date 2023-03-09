@@ -18,13 +18,6 @@ import { Mode } from 'src/modes/mode.entity';
 export class HappeningsResolver {
   constructor(private readonly happeningsService: HappeningsService) {}
 
-  @Mutation(() => Happening)
-  async createHappening(
-    @Args('createHappeningInput') createHappeningInput: CreateHappeningInput,
-  ) {
-    return await this.happeningsService.create(createHappeningInput);
-  }
-
   @Query(() => [Happening], { name: 'ongoingHappenings' })
   findOngoing() {
     return this.happeningsService.findOngoing();
@@ -49,10 +42,14 @@ export class HappeningsResolver {
   async getLeaderboard(
     @Args('address', { type: () => String }) address: string,
   ) {
-    const test = await this.happeningsService.getLeaderboard(address);
+    return await this.happeningsService.getLeaderboard(address);
+  }
 
-    console.log(test);
-    return test;
+  @Mutation(() => Happening)
+  async createHappening(
+    @Args('createHappeningInput') createHappeningInput: CreateHappeningInput,
+  ) {
+    return await this.happeningsService.create(createHappeningInput);
   }
 
   @Mutation(() => Happening)
@@ -65,10 +62,10 @@ export class HappeningsResolver {
     );
   }
 
-  @Mutation(() => Happening)
-  removeHappening(@Args('id', { type: () => Int }) id: number) {
-    return this.happeningsService.remove(id);
-  }
+  // @Mutation(() => Happening)
+  // removeHappening(@Args('id', { type: () => Int }) id: number) {
+  //   return this.happeningsService.remove(id);
+  // }
 
   @ResolveField(() => Mode)
   mode(@Parent() happening: Happening): Promise<Mode> {

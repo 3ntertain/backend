@@ -1,8 +1,5 @@
-import { Injectable } from '@nestjs/common';
-import { SolanaWeb3 } from './SolanaWeb3';
 import { ThirdWeb } from './ThirdWeb';
 
-const solanaWeb3 = new SolanaWeb3();
 const thirdWeb = new ThirdWeb();
 
 export const createCollection = async ({
@@ -20,11 +17,19 @@ export const createCollection = async ({
   creatorFee,
   rewardsDistribution,
 }) => {
+  const SECURITY_WHILE_COUNT = 10;
+  let loops = SECURITY_WHILE_COUNT;
+
   console.log('STARTING CREATE COLLECTION');
 
   let dropAddress;
 
+  loops = SECURITY_WHILE_COUNT;
+
   while (!dropAddress) {
+    loops--;
+    if (!loops) break;
+
     try {
       dropAddress = await thirdWeb.createDrop({
         name: name,
@@ -44,7 +49,12 @@ export const createCollection = async ({
 
   let txMint;
 
+  loops = SECURITY_WHILE_COUNT;
+
   while (!txMint) {
+    loops--;
+    if (!loops) break;
+
     try {
       txMint = await thirdWeb.setClaimConditions({
         address: dropAddress,
@@ -61,7 +71,12 @@ export const createCollection = async ({
 
   let txClaim;
 
-  while (!txClaim) {
+  loops = SECURITY_WHILE_COUNT;
+
+  while (!txMint) {
+    loops--;
+    if (!loops) break;
+
     try {
       txClaim = await thirdWeb.lazyMint({
         address: dropAddress,

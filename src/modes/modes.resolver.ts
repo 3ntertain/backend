@@ -20,11 +20,6 @@ import { Happening } from 'src/happenings/happening.entity';
 export class ModesResolver {
   constructor(private readonly modesService: ModesService) {}
 
-  @Mutation(() => Mode)
-  createMode(@Args('createModeInput') createModeInput: CreateModeInput) {
-    return this.modesService.create(createModeInput);
-  }
-
   @Query(() => [Mode], { name: 'modes' })
   findAll() {
     return this.modesService.findAll();
@@ -35,15 +30,20 @@ export class ModesResolver {
     return this.modesService.findOne(id);
   }
 
-  @Mutation(() => Mode)
-  updateMode(@Args('updateModeInput') updateModeInput: UpdateModeInput) {
-    return this.modesService.update(updateModeInput.id, updateModeInput);
-  }
+  // @Mutation(() => Mode)
+  // createMode(@Args('createModeInput') createModeInput: CreateModeInput) {
+  //   return this.modesService.create(createModeInput);
+  // }
 
-  @Mutation(() => Mode)
-  removeMode(@Args('id', { type: () => Int }) id: number) {
-    return this.modesService.remove(id);
-  }
+  // @Mutation(() => Mode)
+  // updateMode(@Args('updateModeInput') updateModeInput: UpdateModeInput) {
+  //   return this.modesService.update(updateModeInput.id, updateModeInput);
+  // }
+
+  // @Mutation(() => Mode)
+  // removeMode(@Args('id', { type: () => Int }) id: number) {
+  //   return this.modesService.remove(id);
+  // }
 
   @ResolveField(() => Game)
   game(@Parent() mode: Mode): Promise<Game> {

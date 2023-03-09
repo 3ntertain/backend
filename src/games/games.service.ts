@@ -28,7 +28,6 @@ export class GamesService {
   }
 
   async update(id: number, updateGameInput: UpdateGameInput) {
-    console.log(updateGameInput);
     await this.gamesRepository.update(id, updateGameInput);
     return this.gamesRepository.findOneByOrFail({ id: id });
   }

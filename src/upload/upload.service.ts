@@ -17,7 +17,6 @@ export class UploadService {
   }
 
   async create(file: any): Promise<Boolean> {
-    console.log(file);
     const bucketParams = {
       Bucket: this.bucket,
       Body: file.buffer,

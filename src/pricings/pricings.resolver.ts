@@ -18,13 +18,6 @@ import { Mode } from 'src/modes/mode.entity';
 export class PricingsResolver {
   constructor(private readonly pricingsService: PricingsService) {}
 
-  @Mutation(() => Pricing)
-  createPricing(
-    @Args('createPricingInput') createPricingInput: CreatePricingInput,
-  ) {
-    return this.pricingsService.create(createPricingInput);
-  }
-
   @Query(() => [Pricing], { name: 'pricings' })
   findAll() {
     return this.pricingsService.findAll();
@@ -35,20 +28,27 @@ export class PricingsResolver {
     return this.pricingsService.findOne(id);
   }
 
-  @Mutation(() => Pricing)
-  updatePricing(
-    @Args('updatePricingInput') updatePricingInput: UpdatePricingInput,
-  ) {
-    return this.pricingsService.update(
-      updatePricingInput.id,
-      updatePricingInput,
-    );
-  }
+  // @Mutation(() => Pricing)
+  // createPricing(
+  //   @Args('createPricingInput') createPricingInput: CreatePricingInput,
+  // ) {
+  //   return this.pricingsService.create(createPricingInput);
+  // }
 
-  @Mutation(() => Pricing)
-  removePricing(@Args('id', { type: () => Int }) id: number) {
-    return this.pricingsService.remove(id);
-  }
+  // @Mutation(() => Pricing)
+  // updatePricing(
+  //   @Args('updatePricingInput') updatePricingInput: UpdatePricingInput,
+  // ) {
+  //   return this.pricingsService.update(
+  //     updatePricingInput.id,
+  //     updatePricingInput,
+  //   );
+  // }
+
+  // @Mutation(() => Pricing)
+  // removePricing(@Args('id', { type: () => Int }) id: number) {
+  //   return this.pricingsService.remove(id);
+  // }
 
   @ResolveField(() => Mode)
   mode(@Parent() pricing: Pricing): Promise<Mode> {

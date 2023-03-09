@@ -18,13 +18,6 @@ import { Mode } from 'src/modes/mode.entity';
 export class SettingsResolver {
   constructor(private readonly settingsService: SettingsService) {}
 
-  @Mutation(() => Setting)
-  createSetting(
-    @Args('createSettingInput') createSettingInput: CreateSettingInput,
-  ) {
-    return this.settingsService.create(createSettingInput);
-  }
-
   @Query(() => [Setting], { name: 'settings' })
   findAll() {
     return this.settingsService.findAll();
@@ -35,20 +28,27 @@ export class SettingsResolver {
     return this.settingsService.findOne(id);
   }
 
-  @Mutation(() => Setting)
-  updateSetting(
-    @Args('updateSettingInput') updateSettingInput: UpdateSettingInput,
-  ) {
-    return this.settingsService.update(
-      updateSettingInput.id,
-      updateSettingInput,
-    );
-  }
+  // @Mutation(() => Setting)
+  // createSetting(
+  //   @Args('createSettingInput') createSettingInput: CreateSettingInput,
+  // ) {
+  //   return this.settingsService.create(createSettingInput);
+  // }
 
-  @Mutation(() => Setting)
-  removeSetting(@Args('id', { type: () => Int }) id: number) {
-    return this.settingsService.remove(id);
-  }
+  // @Mutation(() => Setting)
+  // updateSetting(
+  //   @Args('updateSettingInput') updateSettingInput: UpdateSettingInput,
+  // ) {
+  //   return this.settingsService.update(
+  //     updateSettingInput.id,
+  //     updateSettingInput,
+  //   );
+  // }
+
+  // @Mutation(() => Setting)
+  // removeSetting(@Args('id', { type: () => Int }) id: number) {
+  //   return this.settingsService.remove(id);
+  // }
 
   @ResolveField(() => Mode)
   mode(@Parent() setting: Setting): Promise<Mode> {

@@ -17,13 +17,6 @@ import { GamesService } from './games.service';
 export class GamesResolver {
   constructor(private gamesService: GamesService) {}
 
-  @Mutation((returns) => Game)
-  createGame(
-    @Args('createGameInput') createGameInput: CreateGameInput,
-  ): Promise<Game> {
-    return this.gamesService.create(createGameInput);
-  }
-
   @Query((returns) => [Game], { name: 'games' })
   findAll(): Promise<Game[]> {
     return this.gamesService.findAll();
@@ -34,15 +27,22 @@ export class GamesResolver {
     return this.gamesService.findOne(id);
   }
 
-  @Mutation(() => Game)
-  updateGame(@Args('updateGameInput') updateGameInput: UpdateGameInput) {
-    return this.gamesService.update(updateGameInput.id, updateGameInput);
-  }
+  // @Mutation((returns) => Game)
+  // createGame(
+  //   @Args('createGameInput') createGameInput: CreateGameInput,
+  // ): Promise<Game> {
+  //   return this.gamesService.create(createGameInput);
+  // }
 
-  @Mutation(() => Game)
-  removeGame(@Args('id', { type: () => Int }) id: number) {
-    return this.gamesService.remove(id);
-  }
+  // @Mutation(() => Game)
+  // updateGame(@Args('updateGameInput') updateGameInput: UpdateGameInput) {
+  //   return this.gamesService.update(updateGameInput.id, updateGameInput);
+  // }
+
+  // @Mutation(() => Game)
+  // removeGame(@Args('id', { type: () => Int }) id: number) {
+  //   return this.gamesService.remove(id);
+  // }
 
   @ResolveField()
   modes(@Parent() game: Game): Promise<Mode[]> {

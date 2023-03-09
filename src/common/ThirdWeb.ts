@@ -24,7 +24,6 @@ export class ThirdWeb {
       return address;
     } catch (error) {
       console.log(error);
-      // this.createDrop({ name, symbol, description, totalSupply, image });
     }
   };
 
@@ -43,7 +42,7 @@ export class ThirdWeb {
         maxClaimable: supply,
         price: price,
         startTime: startTime ? startTime : new Date(),
-        sellerFeeBasisPoints: sellerFeeBasisPoints ? sellerFeeBasisPoints : 0,
+        sellerFeeBasisPoints: 5,
       });
     } catch (error) {
       // this.setClaimConditions({ address, price, startTime });
@@ -94,14 +93,14 @@ export class ThirdWeb {
             value: symbol,
           },
 
-          {
-            name: 'Start',
-            value: dateStart,
-          },
-          {
-            name: 'End',
-            value: dateEnd,
-          },
+          // {
+          //   name: 'Start',
+          //   value: dateStart,
+          // },
+          // {
+          //   name: 'End',
+          //   value: dateEnd,
+          // },
 
           {
             name: 'Creator',
