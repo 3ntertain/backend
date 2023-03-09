@@ -8,23 +8,11 @@ export const createCollection = async ({
   description,
   slots,
   nftPicture,
-  price,
-  start,
-  end,
-  game,
-  mode,
-  creator,
-  creatorFee,
-  rewardsDistribution,
 }) => {
-  const SECURITY_WHILE_COUNT = 20;
-  let loops = SECURITY_WHILE_COUNT;
-
   console.log('STARTING CREATE COLLECTION');
 
   let dropAddress;
-
-  loops = SECURITY_WHILE_COUNT;
+  let loops = 10;
 
   while (!dropAddress) {
     loops--;
@@ -45,11 +33,12 @@ export const createCollection = async ({
 
   if (!dropAddress) return;
 
-  console.log('DROP ADDRESS' + dropAddress);
+  return dropAddress;
+};
 
+export const setClaim = async ({ price, dropAddress }) => {
   let txMint;
-
-  loops = SECURITY_WHILE_COUNT;
+  let loops = 10;
 
   while (!txMint) {
     loops--;
@@ -60,7 +49,7 @@ export const createCollection = async ({
         address: dropAddress,
         price: price,
         startTime: new Date(),
-        sellerFeeBasisPoints: creatorFee * 100,
+        sellerFeeBasisPoints: 500,
       });
     } catch (e) {
       console.log('THE ERROR' + e);
@@ -69,12 +58,25 @@ export const createCollection = async ({
 
   console.log('CLAIM CONDITION SET' + txMint);
 
-  let txClaim;
+  return txMint;
+};
 
-  loops = 50;
+export const lazyMint = async ({
+  dropAddress,
+  symbol,
+  start,
+  end,
+  game,
+  mode,
+  creator,
+  rewardsDistribution,
+}) => {
+  let txClaim;
+  let loops = 10;
 
   while (!txClaim) {
     loops--;
+
     if (!loops) break;
 
     try {
@@ -93,7 +95,5 @@ export const createCollection = async ({
     }
   }
 
-  console.log('MINTED' + txClaim);
-
-  return dropAddress;
+  return txClaim;
 };

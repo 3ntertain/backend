@@ -114,6 +114,8 @@ type Query {
 type Mutation {
   createHappening(createHappeningInput: CreateHappeningInput!): Happening!
   updateHappening(updateHappeningInput: UpdateHappeningInput!): Happening!
+  setClaimHappening(id: Int!): Happening!
+  lazyMintHappening(id: Int!): Happening!
   createUpload(createUploadInput: CreateUploadInput!): Boolean!
 }
 

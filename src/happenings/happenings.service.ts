@@ -6,7 +6,11 @@ import { FindOptionsWhere, LessThan, MoreThan, Repository } from 'typeorm';
 import { CreateHappeningInput } from './dto/create-happening.input';
 import { UpdateHappeningInput } from './dto/update-happening.input';
 import { Happening } from './happening.entity';
-import { createCollection } from 'src/common/createCollection';
+import {
+  createCollection,
+  setClaim,
+  lazyMint,
+} from 'src/common/createCollection';
 import { emitCreate } from 'src/common/emit-create';
 
 @Injectable()
@@ -27,15 +31,16 @@ export class HappeningsService {
       symbol: game.symbol,
       description: createHappeningInput.description,
       slots: createHappeningInput.slots,
-      price: createHappeningInput.price,
-      start: createHappeningInput.start,
-      end: createHappeningInput.end,
-      game: game.name,
-      mode: mode.name,
       nftPicture: createHappeningInput.ticket,
-      creator: createHappeningInput.creator,
-      creatorFee: createHappeningInput.creatorFee,
-      rewardsDistribution: createHappeningInput.rewards,
+
+      // price: createHappeningInput.price,
+      // start: createHappeningInput.start,
+      // end: createHappeningInput.end,
+      // game: game.name,
+      // mode: mode.name,
+      // creator: createHappeningInput.creator,
+      // creatorFee: createHappeningInput.creatorFee,
+      // rewardsDistribution: createHappeningInput.rewards,
     });
 
     createHappeningInput.address = dropAddress;
@@ -45,6 +50,40 @@ export class HappeningsService {
     await emitCreate(newHappening, mode, game);
 
     return this.happeningRepository.save(newHappening);
+  }
+
+  async setClaim(id: number) {
+    const happening = await this.happeningRepository.findOneByOrFail({
+      id: id,
+    });
+
+    await setClaim({
+      dropAddress: happening.address,
+      price: happening.price,
+    });
+
+    return happening;
+  }
+
+  async lazyMint(id: number) {
+    const happening = await this.happeningRepository.findOneByOrFail({
+      id: id,
+    });
+    const mode = await this.modesService.findOne(happening.modeId);
+    const game = await this.modesService.getGame(mode.gameId);
+
+    await lazyMint({
+      dropAddress: happening.address,
+      symbol: game.symbol,
+      start: happening.start,
+      end: happening.end,
+      game: game.name,
+      mode: mode.name,
+      creator: happening.creator,
+      rewardsDistribution: happening.rewards,
+    });
+
+    return happening;
   }
 
   findOngoing() {

@@ -62,6 +62,16 @@ export class HappeningsResolver {
     );
   }
 
+  @Mutation(() => Happening)
+  setClaimHappening(@Args('id', { type: () => Int }) id: number) {
+    return this.happeningsService.setClaim(id);
+  }
+
+  @Mutation(() => Happening)
+  lazyMintHappening(@Args('id', { type: () => Int }) id: number) {
+    return this.happeningsService.lazyMint(id);
+  }
+
   // @Mutation(() => Happening)
   // removeHappening(@Args('id', { type: () => Int }) id: number) {
   //   return this.happeningsService.remove(id);
