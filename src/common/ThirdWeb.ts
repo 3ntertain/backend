@@ -74,7 +74,7 @@ export class ThirdWeb {
         description: metadata.description,
         image: metadata.image,
         symbol: 'CODT',
-        external_url: `${process.env.APP_URL}/event/${address}`,
+        external_url: `${process.env.APP_URL}/events/${address}`,
         properties: [
           {
             name: 'Game',
