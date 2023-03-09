@@ -88,10 +88,10 @@ export class ThirdWeb {
             name: 'Collection',
             value: address,
           },
-          {
-            name: 'Symbol',
-            value: symbol,
-          },
+          // {
+          //   name: 'Symbol',
+          //   value: symbol,
+          // },
 
           // {
           //   name: 'Start',
@@ -106,10 +106,10 @@ export class ThirdWeb {
             name: 'Creator',
             value: creator,
           },
-          {
-            name: 'Rewards Distribution',
-            value: rewardsDistribution,
-          },
+          // {
+          //   name: 'Rewards Distribution',
+          //   value: rewardsDistribution,
+          // },
         ],
       };
 
