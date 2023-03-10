@@ -39,13 +39,12 @@ In its current stage, 3ntertain takes advantage of the power of Solana and relay
 - Run locally the server `npm run start:dev`
 
 You will need to configure an env file
-`
+
+```
 PORT=5000
 PRIVATE_KEY=xxx
 NETWORK=devnet
 APP_URL=https://3ntertain.io
-
-# Database
 
 DB_HOST=
 DB_PORT=3306
@@ -53,10 +52,8 @@ DB_DATABASE=
 DB_USER=
 DB_PASSWORD=
 
-# Amazon S3
-
 AWS_ACCESS_KEY_ID=
 AWS_SECRET_ACCESS_KEY=
 AWS_BUCKET_REGION=
 AWS_BUCKET_NAME=
-`
+```
